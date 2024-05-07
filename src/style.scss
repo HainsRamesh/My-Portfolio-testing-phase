@@ -1,0 +1,812 @@
+:root {
+  font-family: "Inter", sans-serif;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+div {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  padding-top: 100px;
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* SASS VARIABLES */
+/* ~~~~~~~~~~~~~~~~~~ */
+$gradient-color-1: linear-gradient(
+  90deg,
+  rgba(129, 33, 208, 1) 50%,
+  rgba(51, 19, 82, 1) 75%,
+  rgba(41, 28, 58, 1) 100%
+);
+$gradient-color-2: linear-gradient(
+  126deg,
+  rgba(51, 28, 82, 1) 30%,
+  #221b36 50%
+);
+$box-shadow: 0px 3px 16px 2px rgba(0, 0, 0, 0.6);
+$primary-clr-1: #291c3a;
+$primary-clr-2: #331c52;
+$primary-clr-3: #8121d0;
+$primary-clr-4: #dccfed;
+$primary-clr-5: #e1ebed;
+$banner-text-color: #8b73b1;
+$text-color: #5d4b7d;
+$active-clr: #cdb6ec;
+$highlight: #9c2473;
+$white: #fff;
+$black: #000;
+$link-font: 1rem;
+$small-screen-p: 1.3rem;
+$small-screen-h1: 3rem;
+$lg-screen-p: 30px;
+$lg-screen-h1: 90px;
+$h2-font-size: 27px;
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* COMMON CLASSES */
+/* ~~~~~~~~~~~~~~~~~~ */
+.links {
+  display: flex;
+  gap: 1rem;
+  padding-top: 10px;
+  height: 10vh;
+  li {
+    list-style-type: none;
+    a {
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s ease;
+    }
+  }
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* NAVIGATION MENU */
+/* ~~~~~~~~~~~~~~~~~~ */
+.nav-container {
+  background: $gradient-color-1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000000;
+  width: 100%;
+  box-shadow: $box-shadow;
+  .section-container {
+    width: 90vw;
+    margin: 0 auto;
+    @media screen and (min-width: 1024px) {
+      width: 62vw;
+      margin: 0 0 0 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-center {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .logo {
+        color: $white;
+        font-size: 20px;
+      }
+      .burger-icon {
+        width: 25px;
+        height: 25px;
+        position: relative;
+        cursor: pointer;
+        .line {
+          background-color: $white;
+          width: 100%;
+          height: 2px;
+          border-radius: 5px;
+          display: block;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          transition: ease-in 0.3s;
+        }
+        .line-1 {
+          transform: translate(-50%, -7px);
+        }
+        .line-3 {
+          transform: translate(-50%, 5px);
+        }
+        @media screen and (min-width: 1024px) {
+          display: none;
+        }
+      }
+      .x-icon {
+        .line-1 {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        .line-2 {
+          width: 0;
+        }
+        .line-3 {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+      }
+    }
+    .links-container {
+      display: block;
+      height: 100vh;
+      transition: linear 0.3s;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      font-size: $link-font;
+      font-weight: 500;
+      .link {
+        list-style-type: none;
+        padding: 15px;
+        @media screen and (min-width: "1024px") {
+          padding-right: 20px;
+        }
+        .anchor {
+          cursor: pointer;
+          font-size: $link-font;
+          color: $white;
+          text-decoration: none;
+          text-transform: capitalize;
+          transition: 0.3s ease;
+        }
+        .anchor:hover,
+        .active-nav {
+          color: $active-clr;
+          font-weight: 600;
+          transition: 0.5s ease;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        height: auto !important;
+        flex-direction: row;
+        .anchor {
+          cursor: pointer;
+          font-size: $link-font;
+          color: $white;
+          text-decoration: none;
+          text-transform: capitalize;
+        }
+        .anchor:hover,
+        .active-nav {
+          color: $active-clr;
+          font-weight: 600;
+          transition: 0.5s ease;
+        }
+      }
+    }
+    .hide-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      height: 0;
+      overflow: hidden;
+      transition: linear 0.2s;
+      font-size: $link-font;
+      font-weight: 500;
+      .link {
+        list-style-type: none;
+        padding: 15px;
+        @media screen and (min-width: "1024px") {
+          padding-right: 20px;
+        }
+        .anchor {
+          cursor: pointer;
+          font-size: $link-font;
+          color: $white;
+          text-decoration: none;
+          text-transform: capitalize;
+        }
+        .anchor:hover,
+        .active-nav {
+          color: $active-clr;
+          font-weight: 600;
+          transition: 0.3s ease;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        font-size: $link-font;
+        color: $white;
+        height: auto !important;
+        flex-direction: row;
+      }
+    }
+    .resume-btn {
+      display: none;
+      @media screen and (min-width: 1024px) {
+        display: flex;
+        gap: 3px;
+        border-radius: 4.5px;
+        border: none;
+        background: $white;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 6px 18px;
+        color: $primary-clr-2;
+        font-weight: 600;
+        transition: ease 0.3s;
+      }
+    }
+    .resume-btn:hover {
+      color: $primary-clr-1;
+      background: $primary-clr-4;
+    }
+  }
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* BANNER SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.banner {
+  background: $gradient-color-2;
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  @media screen and (min-width: 1440px) {
+    height: 90vh;
+  }
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    color: $white;
+    z-index: 1;
+    @media screen and (min-width: "1024px") {
+      width: 80vw;
+    }
+    .bold-text {
+      font-size: $small-screen-p;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding-bottom: 10px;
+      @media screen and (min-width: "1024px") {
+        font-size: $lg-screen-p;
+        padding-bottom: 18px;
+      }
+    }
+    h1 {
+      font-size: $small-screen-h1;
+      padding-bottom: 10px;
+      color: $banner-text-color;
+      @media screen and (min-width: "1024px") {
+        font-size: $lg-screen-h1;
+        line-height: 80px;
+        padding-bottom: 18px;
+      }
+    }
+    p {
+      font-size: $small-screen-p;
+      padding-bottom: 10px;
+      @media screen and (min-width: "1024px") {
+        font-size: $lg-screen-p;
+        font-weight: 500;
+        padding-bottom: 18px;
+      }
+    }
+    .social-links {
+      padding-top: 10px;
+      li {
+        a {
+          background: $banner-text-color;
+          color: $primary-clr-2;
+        }
+        a:hover {
+          color: $primary-clr-1;
+          background: $primary-clr-4;
+        }
+      }
+    }
+  }
+  .banner-img {
+    display: block;
+    position: absolute;
+    width: 400px;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    opacity: 0.4;
+    @media screen and (min-width: "768px") {
+      opacity: 1;
+      width: 550px;
+    }
+    @media screen and (min-width: "1440px") {
+      width: 750px;
+    }
+  }
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* EXPERIENCE SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.experience {
+  background: $primary-clr-1;
+  .section-center {
+    margin: 0 auto;
+    padding: 0;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 40px 0;
+    color: $white;
+    @media screen and (min-width: "768px") {
+      display: grid;
+    }
+    @media screen and (min-width: "1024px") {
+      width: 80vw;
+    }
+    @media screen and (min-width: "1440px") {
+      width: 80vw;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .text-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      .number {
+        font-size: 3.6rem;
+        font-weight: 700;
+        color: $white;
+      }
+      .text {
+        color: $primary-clr-4;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+      }
+    }
+    .icons-container {
+      grid-column: 1 / span 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      gap: 15px;
+      padding-top: 20px;
+      @media screen and (min-width: 440px) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      @media screen and (min-width: "768px") {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 40px;
+      }
+      @media screen and (min-width: "1440px") {
+        padding-top: 0;
+      }
+      .icon {
+        place-self: center;
+        width: 50px;
+      }
+    }
+  }
+}
+/* ^^^^^^^^^^^^^^^^^^ */
+/* ABOUT SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.about {
+  background: $primary-clr-5;
+  display: flex;
+  justify-content: flex-start;
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    padding: 40px 0;
+    @media screen and (min-width: "1024px") {
+      width: 33vw;
+      margin-left: 10vw;
+      padding: 50px 0 0 0;
+    }
+    h2 {
+      font-size: $h2-font-size;
+      color: $primary-clr-2;
+      padding-bottom: 10px;
+    }
+    p {
+      font-size: $small-screen-p;
+      color: $text-color;
+      font-weight: 400;
+    }
+  }
+}
+/* ^^^^^^^^^^^^^^^^^^ */
+/* SKILLS SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.skills {
+  background: $primary-clr-5;
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    @media screen and (min-width: 1024px) {
+      display: flex;
+      justify-content: space-between;
+      width: 80vw;
+      padding: 100px 0 100px 0;
+    }
+    .content-section {
+      @media screen and (min-width: "1024px") {
+        width: 33vw;
+      }
+      h2 {
+        font-size: $h2-font-size;
+        color: $primary-clr-2;
+        padding-bottom: 10px;
+      }
+      p {
+        font-size: $small-screen-p;
+        color: $text-color;
+        font-weight: 400;
+        padding-bottom: 20px;
+      }
+      .image-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 15px;
+        @media screen and (min-width: "1440px") {
+          gap: 20px;
+        }
+        .icon-container {
+          place-self: center;
+          width: 80px;
+          height: 80px;
+          background: $primary-clr-1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+/* ^^^^^^^^^^^^^^^^^^ */
+/* PROJECTS SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.projects {
+  background-color: $primary-clr-5;
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    @media screen and (min-width: 1024px) {
+      width: 80vw;
+    }
+    h2 {
+      font-size: $h2-font-size;
+      color: $primary-clr-2;
+      padding-bottom: 10px;
+    }
+    p {
+      font-size: $small-screen-p;
+      color: $text-color;
+      font-weight: 400;
+      padding-bottom: 20px;
+    }
+    .card {
+      background: $primary-clr-4;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 0 5px;
+      @media screen and (min-width: "768px") {
+        box-shadow: -2px 0px 5px rgb(207, 206, 206);
+        margin: 0px 10px;
+      }
+      .card-img {
+        width: 100%;
+        border-radius: 5px;
+        object-fit: contain;
+        padding-bottom: 10px;
+      }
+      h3 {
+        color: $primary-clr-2;
+        padding-bottom: 10px;
+      }
+      p {
+        font-size: 13px;
+        padding-bottom: 20px;
+        color: $black;
+      }
+      .button-container {
+        display: flex;
+        gap: 4px;
+        .card-button {
+          width: 100%;
+          padding: 5px;
+          border-radius: 5px;
+          text-align: center;
+          font-size: 13px;
+          background: $primary-clr-2;
+          border: none;
+          color: $white;
+          text-decoration: none;
+          transition: 0.1s linear;
+        }
+        .card-button:hover,
+        .card-button:active {
+          background: $primary-clr-1;
+        }
+      }
+    }
+  }
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* CONTACT SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.contact {
+  padding: 100px 0;
+  background: $primary-clr-4;
+  .section-center {
+    width: 90vw;
+    margin: 0 auto;
+    @media screen and (min-width: "768px") {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      align-items: center;
+    }
+    @media screen and (min-width: "1024px") {
+      width: 80vw;
+    }
+    .text-content {
+      h2 {
+        color: $primary-clr-2;
+        font-weight: 800;
+        font-size: 30px;
+        margin-bottom: 30px;
+        .cool-pink {
+          color: $highlight;
+        }
+      }
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      .input {
+        padding: 10px;
+        border-radius: 5px;
+        border: $primary-clr-3 0.2px solid;
+        font-family: inherit;
+        margin-bottom: 15px;
+      }
+      .input:focus {
+        outline: 2px solid $primary-clr-2;
+      }
+      .text-area {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        resize: none;
+      }
+      .form-btn {
+        border: none;
+        background: $primary-clr-2;
+        color: $white;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        transition: 0.1s linear;
+      }
+      .form-btn:hover,
+      .form-btn:active {
+        background: $primary-clr-1;
+      }
+      .contact-links {
+        justify-content: center;
+        padding-top: 10px;
+        a {
+          border: 1px solid $primary-clr-2;
+          color: $primary-clr-2;
+        }
+        a:hover {
+          color: $white;
+          background: $primary-clr-2;
+        }
+      }
+    }
+  }
+}
+
+/* ^^^^^^^^^^^^^^^^^^ */
+/* FOOTER SECTION */
+/* ~~~~~~~~~~~~~~~~~~ */
+.footer {
+  background: $primary-clr-1;
+  text-align: center;
+  padding: 30px 0;
+  .logo {
+    width: 100px;
+  }
+  p {
+    font-size: 1.1rem;
+    color: $white;
+    padding-bottom: 5px;
+    .name,
+    .love,
+    .coffee {
+      color: $highlight;
+    }
+  }
+  .footer-links {
+    justify-content: center;
+    a {
+      background: $white;
+      color: $primary-clr-2;
+    }
+    a:hover {
+      color: $white;
+      background: $highlight;
+    }
+  }
+}
+
+.particles {
+  overflow: hidden;
+  pointer-events: none;
+  .particle {
+    filter: blur(1px);
+    width: 150px;
+    animation: moveAroundAnimation 20s ease-in-out infinite;
+  }
+  .shape {
+    display: none;
+    @media screen and (min-width: 768px) {
+      filter: blur(1px);
+      opacity: 0.3;
+      width: 100px;
+      animation: moveAroundAnimation2 20s ease-in-out infinite;
+    }
+  }
+  .shapeOne {
+    @media screen and (min-width: 768px) {
+      display: block;
+      position: absolute;
+      left: 200px;
+    }
+  }
+  .shapeTwo {
+    @media screen and (min-width: 1024px) {
+      display: block;
+      position: absolute;
+      left: 500px;
+      top: 200px;
+    }
+  }
+  .particle-1 {
+    position: absolute;
+    width: 80px;
+    right: 50px;
+    bottom: 70px;
+    @media screen and (min-width: "768px") {
+      right: 100px;
+      bottom: 100px;
+    }
+    @media screen and (min-width: "1024px") {
+      right: 100px;
+      bottom: 200px;
+    }
+  }
+  .particle-2 {
+    position: absolute;
+    width: 80px;
+    right: 100px;
+    bottom: 300px;
+    @media screen and (min-width: "768px") {
+      right: 120px;
+      bottom: 400px;
+    }
+    @media screen and (min-width: "1024px") {
+      right: 200px;
+      bottom: 500px;
+    }
+  }
+}
+
+@keyframes moveAroundAnimation {
+  0% {
+    transform: translateX(0vw) translateY(0vw) rotate(0deg);
+    filter: blur(1px);
+  }
+  20% {
+    transform: translateX(3vw) translateY(2vw) rotate(23deg);
+    filter: blur(1px);
+  }
+  20% {
+    transform: translateX(2vw) translateY(3vw) rotate(12deg);
+    filter: blur(2px);
+  }
+
+  40% {
+    transform: translateX(3vw) translateY(5vw) rotate(4deg);
+    filter: blur(2px);
+  }
+  50% {
+    transform: translateX(1vw) translateY(7vw) rotate(5deg);
+    filter: blur(1px);
+  }
+  60% {
+    transform: translateX(3vw) translateY(9vw) rotate(34deg);
+    filter: blur(2px);
+  }
+  70% {
+    transform: translateX(0vw) translateY(6vw) rotate(45deg);
+    filter: blur(1px);
+  }
+  80% {
+    transform: translateX(4vw) translateY(4vw) rotate(78deg);
+    filter: blur(2px);
+  }
+  90% {
+    transform: translateX(2vw) translateY(1vw) rotate(25deg);
+    filter: blur(1px);
+  }
+  100% {
+    transform: translateX(0vw) translateY(0vw) rotate(0deg);
+    filter: blur(1px);
+  }
+}
+
+@keyframes moveAroundAnimation2 {
+  0% {
+    transform: translateX(0vw) translateY(0vw) rotate(0deg);
+    filter: blur(1px);
+  }
+  20% {
+    transform: translateX(3vw) translateY(2vw) rotate(180deg);
+    filter: blur(1px);
+  }
+  20% {
+    transform: translateX(2vw) translateY(6vw) rotate(423deg);
+    filter: blur(2px);
+  }
+  40% {
+    transform: translateX(3vw) translateY(5vw) rotate(54deg);
+    filter: blur(2px);
+  }
+  50% {
+    transform: translateX(1vw) translateY(7vw) rotate(97deg);
+    filter: blur(1px);
+  }
+  60% {
+    transform: translateX(3vw) translateY(9vw) rotate(34deg);
+    filter: blur(2px);
+  }
+  70% {
+    transform: translateX(0vw) translateY(2vw) rotate(0deg);
+    filter: blur(1px);
+  }
+  80% {
+    transform: translateX(4vw) translateY(4vw) rotate(65deg);
+    filter: blur(2px);
+  }
+  90% {
+    transform: translateX(2vw) translateY(1vw) rotate(0deg);
+    filter: blur(1px);
+  }
+  100% {
+    transform: translateX(0vw) translateY(0vw) rotate(0deg);
+    filter: blur(1px);
+  }
+}
