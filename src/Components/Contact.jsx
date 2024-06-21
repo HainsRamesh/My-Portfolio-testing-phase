@@ -1,17 +1,20 @@
-import Form from "../CustomComponents/Form";
+import { LiaTelegram } from "react-icons/lia";
 
 const Contact = () => {
   return (
     <section className="contact" id="contact">
       <div className="section-center">
-        <div className="text-content">
-          <h2>
-            Let's discuss
-            <br />
-            on something <span className="cool-pink">cool</span> together
-          </h2>
+        <div className="telegram-icon">
+          <LiaTelegram />
         </div>
-        <Form />
+        <h2 className="heading-two">get in touch!</h2>
+        <p className="paragraph">
+          Whether you have an idea for a project or just want to chat,<br></br>
+          feel free to shoot me an email!
+        </p>
+        <a className="btn" href="mailto:rameshhains@gmail.com">
+          say hello
+        </a>
       </div>
     </section>
   );

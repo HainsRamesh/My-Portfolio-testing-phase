@@ -1,23 +1,45 @@
-import { useState } from "react";
-import { NavLinks } from "../Data";
-import { BsFileEarmarkPdfFill } from "react-icons/bs";
-import logo from "../assets/Images/THE_hains's.png";
-import resume from "../assets/Files/resume.pdf";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-scroll";
+import { NavData } from "../Data";
+import NavLinkList from "../InnerComponents/NavLinkList";
+import logo from "../assets/Images/logo.png";
 
 const Navigation = () => {
   const [showLinks, setShowLinks] = useState(false);
+  const [height, setHeight] = useState(0);
+  const refContainer = useRef(null);
+
+  useEffect(() => {
+    if (refContainer.current) {
+      setHeight(refContainer.current.offsetHeight);
+    }
+  }, []);
+
+  const listItems = NavData.map((nav) => (
+    <NavLinkList
+      key={nav.id}
+      {...nav}
+      setShowLinks={setShowLinks}
+      height={height}
+    />
+  ));
 
   return (
-    <nav className="nav-container">
+    <nav className="nav-container" ref={refContainer}>
       <div className="section-container">
         <div className="section-center">
-          <img
-            src={logo}
-            alt="logo"
-            style={{ width: "100px", margin: "0px" }}
-          />
-
+          <Link
+            activeClass="active-nav"
+            to="banner"
+            spy={true}
+            smooth={true}
+            duration={100}
+            className="anchor"
+            style={{ cursor: "pointer" }}
+          >
+            <img src={logo} alt="logo" className="logo" />
+          </Link>
+          {/* Burger Icon for toggling navigation links */}
           <div
             className={showLinks ? "burger-icon x-icon" : "burger-icon"}
             onClick={() => {
@@ -29,37 +51,11 @@ const Navigation = () => {
             <span className="line line-3"></span>
           </div>
         </div>
+
+        {/* Navigation Links */}
         <ul className={showLinks ? "links-container" : "hide-container"}>
-          {NavLinks.map(({ id, name, url }) => {
-            return (
-              <li className="link" key={id}>
-                <Link
-                  activeClass="active-nav"
-                  to={url}
-                  spy={true}
-                  smooth={true}
-                  offset={-115}
-                  duration={500}
-                  onClick={() => setShowLinks(false)}
-                  className="anchor"
-                >
-                  {name}
-                </Link>
-              </li>
-            );
-          })}
+          {listItems}
         </ul>
-        <a
-          href={resume}
-          target="_blank"
-          className="resume-btn"
-          rel="noopener noreferrer"
-        >
-          <span className="icon">
-            <BsFileEarmarkPdfFill />
-          </span>
-          <span>Resume</span>
-        </a>
       </div>
     </nav>
   );

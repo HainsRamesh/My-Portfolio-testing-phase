@@ -1,10 +1,13 @@
+import { useEffect, useRef, useState } from "react";
 import { socialLinks } from "../Data";
+import { particleData } from "../Data";
+import ParticleList from "../InnerComponents/ParticleList";
+import CustomSocialLinks from "../CustomComponents/CustomSocialLinks";
 import bannerImg from "../assets/Images/banner.png";
-import particleOne from "../assets/Images/particle1.png";
-import particleTwo from "../assets/Images/particle2.png";
-import shapeOne from "../assets/Images/shape1.png";
-import shapeTwo from "../assets/Images/shape2.png";
-import IconLinks from "../CustomComponents/IconLinks";
+
+const particles = particleData.map((particle) => (
+  <ParticleList key={particle.id} {...particle} />
+));
 
 const Banner = () => {
   return (
@@ -17,28 +20,12 @@ const Banner = () => {
           Developer
         </h1>
         <p>I build things for web</p>
-        <ul className="links social-links">
-          <IconLinks links={socialLinks} />
+        <ul className="links">
+          <CustomSocialLinks links={socialLinks} />
         </ul>
       </div>
       <img src={bannerImg} alt="banner-ai-image" className="banner-img" />
-
-      <div className="particles">
-        <img
-          rel="preload"
-          className="particle particle-1"
-          src={particleOne}
-          alt="particle"
-        />
-        <img
-          rel="preload"
-          className="particle particle-2"
-          src={particleTwo}
-          alt="Particle"
-        />
-        <img src={shapeOne} alt="shape" className="shape shapeOne" />
-        <img src={shapeTwo} alt="shape" className="shape shapeTwo" />
-      </div>
+      <div className="particles">{particles}</div>
     </section>
   );
 };
